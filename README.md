@@ -137,7 +137,7 @@ PostgreSQL pour la base de données.
 
 📄 Licence
 
-Projet développé par Manar AFIFI et Yassine IJJA © 2025. Tous droits réservés.
+Projet développé par Manar AFIFI et Yassine IJJA © 2025 MBDS.
 
 
 
