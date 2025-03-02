@@ -2,26 +2,28 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Gauniv.Client.ViewModel"
-             x:Class="Gauniv.Client.Pages.MyGamesPage"
-             Title="Mes Jeux">
+             x:Class="Gauniv.Client.Pages.GamesPage"
+             Title="Liste des Jeux">
     <ContentPage.BindingContext>
         <vm:GameViewModel />
     </ContentPage.BindingContext>
 
     <StackLayout Padding="10">
-        <CollectionView ItemsSource="{Binding OwnedGames}">
+        <SearchBar Placeholder="Rechercher un jeu..." Text="{Binding SearchText, Mode=TwoWay}" />
+        <CollectionView ItemsSource="{Binding Games}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Padding="10">
                         <StackLayout>
                             <Label Text="{Binding Name}" FontSize="20" />
-                            <Button Text="Jouer" Command="{Binding PlayGameCommand}" CommandParameter="{Binding Id}" IsVisible="{Binding IsDownloaded}" />
-                            <Button Text="Supprimer" Command="{Binding DeleteGameCommand}" CommandParameter="{Binding Id}" IsVisible="{Binding IsDownloaded}" />
-                            <Button Text="Télécharger" Command="{Binding DownloadGameCommand}" CommandParameter="{Binding Id}" IsVisible="{Binding !IsDownloaded}" />
+                            <Label Text="{Binding Description}" FontSize="14" />
+                            <Label Text="{Binding Price, StringFormat='Prix : {0:C}'}" FontSize="16" />
+                            <Button Text="Acheter" Command="{Binding BuyGameCommand}" CommandParameter="{Binding Id}" />
                         </StackLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <Button Text="Charger plus" Command="{Binding LoadMoreCommand}" />
     </StackLayout>
 </ContentPage>

@@ -1,53 +1,46 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Shell
     x:Class="Gauniv.Client.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:local="clr-namespace:Gauniv.Client.Pages"
-       xmlns:vm="clr-namespace:Gauniv.Client.ViewModel"
-       xmlns:service="clr-namespace:Gauniv.Client.Services"
-       Shell.FlyoutBehavior="Flyout"
-       Shell.NavBarIsVisible="false"
-       Title="Gauniv.Client"
-       BindingContext="{vm:MenuViewModel}"
-       x:DataType="vm:MenuViewModel">
+    xmlns:local="clr-namespace:Gauniv.Client.Pages"
+    xmlns:vm="clr-namespace:Gauniv.Client.ViewModel"
+    xmlns:service="clr-namespace:Gauniv.Client.Services"
+    Shell.FlyoutBehavior="Flyout"
+    Shell.NavBarIsVisible="false"
+    Title="Gauniv.Client"
+    BindingContext="{Binding Source={x:Static vm:MenuViewModel}}"
+    x:DataType="vm:MenuViewModel">
 
-    <!--<MenuItem Text="Help"
-              IconImageSource="help.png"
-              Command="{Binding GoToProfileCommand}"/>-->
-    <FlyoutItem Title="Acueil"
-                Route="IndexPage">
-        <ShellContent ContentTemplate="{DataTemplate local:IndexPage}" />
+    <!-- Accueil avec la liste des jeux -->
+    <FlyoutItem Title="Accueil" Route="GamesPage">
+        <ShellContent ContentTemplate="{DataTemplate local:GamesPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Ajouter un jeu" Route="addGamePage">
-        <ShellContent ContentTemplate="{DataTemplate local:AddGamePage}" />
-    </FlyoutItem>
-   
     <FlyoutItem Title="Connexion" Route="LoginPage">
         <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Profile"
-                Route="profile">
-        <ShellContent ContentTemplate="{DataTemplate local:Profile}" />
-    </FlyoutItem>
-    <FlyoutItem Title="My Games"
-                Route="mygames">
+    <!-- Mes Jeux (visible uniquement si connecté) -->
+    <FlyoutItem Title="Mes Jeux" Route="MyGamesPage">
         <FlyoutItem.Style>
             <Style TargetType="FlyoutItem">
-                <Setter Property="IsVisible"
-                        Value="false" />
+                <Setter Property="IsVisible" Value="false" />
                 <Style.Triggers>
                     <DataTrigger TargetType="FlyoutItem"
                                  Binding="{Binding IsConnected}"
                                  Value="True">
-                        <Setter Property="IsVisible"
-                                Value="True" />
+                        <Setter Property="IsVisible" Value="True" />
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
         </FlyoutItem.Style>
-        <ShellContent ContentTemplate="{DataTemplate local:MyGames}" />
+        <ShellContent ContentTemplate="{DataTemplate local:MyGamesPage}" />
     </FlyoutItem>
+
+    <!-- Profil utilisateur -->
+    <FlyoutItem Title="Profil" Route="ProfilePage">
+        <ShellContent ContentTemplate="{DataTemplate local:ProfilePage}" />
+    </FlyoutItem>
+
 </Shell>

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using Windows.Networking.NetworkOperators;
 
 namespace Gauniv.Client.Services
 {
@@ -14,13 +13,7 @@ namespace Gauniv.Client.Services
 
         public GameService(HttpClient httpClient)
         {
-            var handler = new HttpClientHandler()
-            {
-                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
-            };
-            _httpClient = new HttpClient(handler) { BaseAddress = new Uri("https://localhost:7209/api/1.0.0/Games") };
-
-            _httpClient = httpClient;
+            _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         }
 
         public GameService()
@@ -31,7 +24,7 @@ namespace Gauniv.Client.Services
         {
             try
             {
-                string url = $"?offset={(page - 1) * pageSize}&limit={pageSize}";
+                string url = $"api/1.0.0/games?offset={(page - 1) * pageSize}&limit={pageSize}";
                 if (!string.IsNullOrEmpty(search))
                     url += $"&search={search}";
 
@@ -48,7 +41,7 @@ namespace Gauniv.Client.Services
         {
             try
             {
-                var response = await _httpClient.PostAsync($"users/{UserSession.UserId}/games/{gameId}", null);
+                var response = await _httpClient.PostAsync($"api/1.0.0/users/{UserSession.UserId}/games/{gameId}", null);
                 return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
@@ -57,5 +50,61 @@ namespace Gauniv.Client.Services
                 return false;
             }
         }
+
+        public async Task DownloadGameAsync(int gameId)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"api/1.0.0/games/download/{gameId}");
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine($"Téléchargement réussi pour le jeu {gameId}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors du téléchargement du jeu : {ex.Message}");
+            }
+        }
+
+        public async Task<bool> DeleteGameAsync(int gameId)
+        {
+            try
+            {
+                var response = await _httpClient.DeleteAsync($"api/1.0.0/games/{gameId}");
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors de la suppression du jeu : {ex.Message}");
+                return false;
+            }
+        }
+
+        public async Task<List<GameModel>> GetGamesAsync(int page, int pageSize, string search = "", bool owned = false, string category = "", decimal? minPrice = null, decimal? maxPrice = null)
+        {
+            try
+            {
+                string url = $"api/1.0.0/games?offset={(page - 1) * pageSize}&limit={pageSize}";
+                if (!string.IsNullOrEmpty(search))
+                    url += $"&search={search}";
+                if (owned)
+                    url += $"&owned=true";
+                if (!string.IsNullOrEmpty(category))
+                    url += $"&category={category}";
+                if (minPrice.HasValue)
+                    url += $"&minPrice={minPrice.Value}";
+                if (maxPrice.HasValue)
+                    url += $"&maxPrice={maxPrice.Value}";
+
+                return await _httpClient.GetFromJsonAsync<List<GameModel>>(url) ?? new List<GameModel>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors de la récupération des jeux : {ex.Message}");
+                return new List<GameModel>();
+            }
+        }
+
     }
 }

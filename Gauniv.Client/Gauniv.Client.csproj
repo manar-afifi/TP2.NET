@@ -84,9 +84,6 @@
 	  <Compile Update="Pages\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Pages\AddGamePage.xaml.cs">
-	    <DependentUpon>AddGamePage.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="Pages\MyGames.xaml.cs">
 	    <DependentUpon>MyGames.xaml</DependentUpon>
 	  </Compile>
@@ -111,6 +108,12 @@
 	  <MauiXaml Update="Pages\Profile.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Pages\GamesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
 	</ItemGroup>
 
 </Project>
