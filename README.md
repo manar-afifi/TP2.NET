@@ -104,11 +104,17 @@ GET /api/1.0.0/stats → Nombre total de jeux, moyenne de jeux par utilisateur, 
 📌 Fonctionnalités Principales
 
 ✅ Lister les jeux disponibles avec pagination et filtres.
+
 ✅ Voir les jeux possédés par l’utilisateur.
+
 ✅ Acheter, télécharger, lancer et supprimer un jeu.
+
 ✅ Affichage dynamique des boutons en fonction de l’état du jeu.
+
 ✅ Gestion du profil utilisateur (identifiants, dossier d’installation).
+
 ✅ Connexion et authentification.
+
 ✅ Interface moderne avec Shell pour la navigation.
 
 📌 Pages Principales
