@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Gauniv.WebServer.Data
@@ -8,8 +7,12 @@ namespace Gauniv.WebServer.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
-        {
-        }
+        { }
+
         public DbSet<Game> Games { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<GameSession> GameSessions { get; set; }
+
     }
 }

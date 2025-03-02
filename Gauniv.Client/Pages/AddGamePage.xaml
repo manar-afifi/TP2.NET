@@ -1,0 +1,23 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Gauniv.Client.ViewModel"
+             x:Class="Gauniv.Client.Pages.AddGamePage"
+             Title="Ajouter un jeu"
+             BindingContext="{Binding Source={RelativeSource Self}}">
+
+    <StackLayout Padding="20">
+        <Label Text="Nom du Jeu" />
+        <Entry Text="{Binding NewGame.Name}" Placeholder="Entrez le nom du jeu" />
+
+        <Label Text="Description" />
+        <Entry Text="{Binding NewGame.Description}" Placeholder="Entrez la description du jeu" />
+
+        <Label Text="Prix" />
+        <Entry Text="{Binding NewGame.Price}" Keyboard="Numeric" Placeholder="Entrez le prix du jeu" />
+
+        <Label Text="Catégories (séparées par des virgules)" />
+        <Entry Text="{Binding NewGame.Categories}" Placeholder="Catégories" />
+
+        <Button Text="Ajouter le jeu" Command="{Binding AddGameCommand}" />
+    </StackLayout>
+</ContentPage>

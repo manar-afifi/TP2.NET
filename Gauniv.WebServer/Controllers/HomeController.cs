@@ -12,7 +12,7 @@ using NuGet.Packaging;
 using X.PagedList.Extensions;
 
 namespace Gauniv.WebServer.Controllers
-{
+{ 
     public class HomeController(ILogger<HomeController> logger, ApplicationDbContext applicationDbContext, UserManager<User> userManager) : Controller
     {
         private readonly ILogger<HomeController> _logger = logger;

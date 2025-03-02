@@ -38,5 +38,11 @@ namespace Gauniv.Client.Services
             await Shell.Current.GoToAsync($"{typeof(T).Name}", args);
         }
 
+        public async Task NavigateToIndexPage()
+        {
+            await Shell.Current.GoToAsync("//IndexPage");
+        }
+
+
     }
 }

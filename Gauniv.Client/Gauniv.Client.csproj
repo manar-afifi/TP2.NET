@@ -81,12 +81,24 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\LoginPage.xaml.cs">
+	    <DependentUpon>LoginPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\AddGamePage.xaml.cs">
+	    <DependentUpon>AddGamePage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\MyGames.xaml.cs">
 	    <DependentUpon>MyGames.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Pages\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\AddGamePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\GameDetails.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

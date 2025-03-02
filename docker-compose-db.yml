@@ -8,9 +8,9 @@ services:
     volumes:
       - ./tmp/postgres/:/bitnami/postgresql/
     environment:
-      - POSTGRESQL_PASSWORD=password
-      - POSTGRESQL_USERNAME=admin
-      - POSTGRESQL_DATABASE=db
+      - POSTGRESQL_PASSWORD=Manar@123
+      - POSTGRESQL_USERNAME=postgres
+      - POSTGRESQL_DATABASE=LibraryDB
       - POSTGRESQL_REPLICATION_MODE=master
       - POSTGRESQL_REPLICATION_USER=repl_user
       - POSTGRESQL_REPLICATION_PASSWORD=repl_password

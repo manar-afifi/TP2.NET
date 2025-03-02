@@ -1,9 +1,12 @@
+using Gauniv.Client.ViewModel;
+
 namespace Gauniv.Client.Pages;
 
-public partial class Index : ContentPage
+public partial class IndexPage : ContentPage
 {
-	public Index()
-	{
-		InitializeComponent();
-	}
+    public IndexPage()
+    {
+        InitializeComponent();
+        BindingContext = new IndexViewModel(); 
+    }
 }
